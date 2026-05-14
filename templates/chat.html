@@ -105,6 +105,8 @@
         }
         .msg-assistant-container {
             justify-content: flex-start;
+            align-items: flex-start;
+            gap: 16px;
         }
         .message-bubble {
             max-width: 85%;
@@ -121,7 +123,7 @@
         .msg-assistant {
             background-color: transparent;
             color: #e3e3e3;
-            padding: 12px 0;
+            padding: 0;
             width: 100%;
         }
         .user-avatar {
@@ -143,12 +145,14 @@
             height: 32px;
             border-radius: 50%;
             background: linear-gradient(74deg, #4285f4 0%, #9b72cb 46%, #d96570 100%);
+            
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 16px;
+
             flex-shrink: 0;
-            margin-top: 10px;
+
+            position: relative;
         }
         .nexus-star {
             color: white;
@@ -159,6 +163,7 @@
             flex-grow: 1;
             overflow: hidden;
             position: relative;
+            padding-top: 2px;
         }
         .message-actions {
             display: flex;
@@ -266,11 +271,14 @@
             color: #e3e3e3;
             resize: none;
             box-shadow: none !important;
-            padding: 12px 0;
+            padding: 12px 18px;
             max-height: 150px;
             overflow-y: auto;
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
+            padding-left: 18px !important;
+            border-radius: 18px !important;
+            
         }
         .form-control::-webkit-scrollbar {
             display: none;
@@ -302,7 +310,7 @@
         .loader-dots {
             display: flex;
             gap: 4px;
-            margin-top: 10px;
+            margin-top: 0;
         }
         .loader-dots span {
             width: 8px;
@@ -322,6 +330,7 @@
             border: none;
             color: #a8c7fa;
             padding: 10px;
+            transform: translateX(8px);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -359,6 +368,14 @@
             height: 20px;
             fill: currentColor;
         }
+        body.theme-light .btn-secondary {
+            color: #212529 !important;
+            border-color: #ced4da !important;
+        }
+        body.theme-light .btn-secondary:hover {
+            background-color: #e9ecef !important;
+            color: #212529 !important;
+        }
         .file-upload-wrapper {
             display: flex;
             align-items: center;
@@ -369,6 +386,7 @@
             border: none;
             color: #c4c7c5;
             padding: 10px;
+            margin-right: 10px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -391,10 +409,17 @@
             font-size: 0.8rem;
             color: #8e918f;
             margin-left: 10px;
+
+            display: flex;
+            align-items: center;
+
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+
             max-width: 100px;
+
+            height: 40px;
         }
         .file-attachment-badge {
             display: inline-flex;
@@ -444,6 +469,9 @@
         body.theme-light .dropdown-menu { background-color: #ffffff !important; border-color: #dee2e6 !important; }
         body.theme-light .dropdown-item { color: #212529 !important; }
         body.theme-light .dropdown-item:hover { background-color: #f8f9fa !important; }
+        body.theme-light .dropdown-item.text-danger {
+            color: hsl(354, 70%, 54%) !important;
+        }
         body.theme-light .chat-form {
             background-color: #ffffff;
             border: 1px solid #dee2e6;
@@ -504,6 +532,323 @@
             background-color: #ffffff;
             color: #212529;
         }
+        .username-text {
+            color: #e3e3e3;
+        }
+
+        body.theme-light .username-text {
+            color: #212529;
+        }
+        details summary {
+            display: flex;
+            align-items: center;
+
+            min-height: 32px;
+
+            font-size: 0.85rem;
+            margin: 0;
+            padding: 0;
+
+            cursor: pointer;
+            list-style: none;
+            gap: 6px;
+        }
+
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details summary::before {
+            content: '▶';
+            font-size: 0.7rem;
+            color: inherit;
+
+            transition: transform 0.2s ease;
+        }
+
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        details {
+            margin: 0;
+            padding: 0;
+        }
+        .sidebar .btn:hover {
+            background-color: rgba(255,255,255,0.08);
+        }
+        body.theme-light .sidebar .btn:hover {
+            background-color: #e9ecef;
+        }
+        /* =========================
+        SWITCH BASE
+        ========================= */
+
+        .form-switch .form-check-input {
+            width: 46px !important;
+            height: 1.6rem !important;
+
+            cursor: pointer;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+
+            box-shadow: none !important;
+            outline: none !important;
+
+            /* убираем bootstrap синий */
+            background-image: none !important;
+        }
+
+
+
+        /* =========================
+        ТЁМНАЯ ТЕМА
+        ========================= */
+
+        /* выключен */
+        .form-switch .form-check-input {
+            background-color: #2f3032;
+            border: 1px solid #3b3c3e;
+        }
+
+        /* включен */
+        .form-switch .form-check-input:checked {
+            /* фон светлее */
+            background-color: #4a4b4d;
+            border-color: #5a5b5d;
+
+            /* светлый кружок */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23d7d7d7'/%3e%3c/svg%3e") !important;
+        }
+
+        /* выключенный кружок */
+        .form-switch .form-check-input:not(:checked) {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23d7d7d7'/%3e%3c/svg%3e") !important;
+        }
+
+        /* active - убираем синий */
+        .form-switch .form-check-input:active {
+            filter: none !important;
+        }
+
+        /* focus */
+        .form-switch .form-check-input:focus {
+            box-shadow: none !important;
+        }
+
+
+
+        /* =========================
+        СВЕТЛАЯ ТЕМА
+        ========================= */
+
+        body.theme-light .form-switch .form-check-input {
+            background-color: #d3d7dc;
+            border: 1px solid #c2c7cd;
+        }
+
+        /* WHITE THEME - ON */
+        body.theme-light .form-switch .form-check-input:checked {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23000000'/%3e%3c/svg%3e") !important;
+        }
+
+        /* WHITE THEME - OFF */
+        body.theme-light .form-switch .form-check-input:not(:checked) {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23666666'/%3e%3c/svg%3e") !important;
+        }
+
+        body.theme-light .form-switch .form-check-input:focus {
+            box-shadow: none !important;
+        }
+
+        /* SETTINGS MODAL */
+        #settingsModal .modal-content {
+            border-radius: 24px !important;
+            overflow: hidden;
+        }
+
+        /* LIGHT THEME */
+        body.theme-light #settingsModal .modal-content {
+            border-radius: 24px !important;
+        }
+
+        /* =========================
+        SETTINGS BUTTONS
+        ========================= */
+
+        /* КНОПКА СОХРАНИТЬ */
+        #settingsModal .btn-primary {
+            background-color: transparent !important;
+            color: #e3e3e3 !important;
+
+            border: 1px solid #444746 !important;
+
+            border-radius: 999px !important;
+
+            box-shadow: none !important;
+        }
+
+        #settingsModal .btn-primary:hover {
+            background-color: rgba(255,255,255,0.06) !important;
+            border-color: #5a5b5d !important;
+        }
+
+
+        /* LIGHT THEME */
+        body.theme-light #settingsModal .btn-primary {
+            color: #212529 !important;
+            border-color: #cfd4da !important;
+        }
+
+        body.theme-light #settingsModal .btn-primary:hover {
+            background-color: rgba(0,0,0,0.04) !important;
+        }
+
+
+        /* КНОПКА ОТМЕНА */
+        #settingsModal .btn-secondary {
+            border: none !important;
+            background: transparent !important;
+
+            border-radius: 999px !important;
+
+            box-shadow: none !important;
+        }
+
+        #settingsModal .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.05) !important;
+        }
+
+
+        /* LIGHT */
+        body.theme-light #settingsModal .btn-secondary:hover {
+            background-color: rgba(0,0,0,0.04) !important;
+        }
+
+        /* =========================
+        RENAME + DELETE MODALS
+        ========================= */
+
+        /* скругление окна */
+        #renameModal .modal-content,
+        #deleteModal .modal-content {
+            border-radius: 24px !important;
+            overflow: hidden;
+        }
+
+
+        /* SAVE BUTTON */
+        #renameModal .btn-primary {
+
+            background-color: transparent !important;
+            color: #e3e3e3 !important;
+
+            border: 1px solid #444746 !important;
+
+            border-radius: 999px !important;
+
+            box-shadow: none !important;
+        }
+
+        #renameModal .btn-primary:hover {
+            background-color: rgba(255,255,255,0.06) !important;
+            border-color: #5a5b5d !important;
+        }
+
+
+        /* DELETE BUTTON */
+        #deleteModal .btn-danger {
+
+            background-color: transparent !important;
+
+            color: hsl(354, 70%, 54%) !important;
+
+            border: 1px solid hsl(354, 70%, 54%) !important;
+
+            border-radius: 999px !important;
+
+            box-shadow: none !important;
+        }
+
+        #deleteModal .btn-danger:hover {
+            background-color: hsla(354, 70%, 54%, 0.08) !important;
+
+            border-color: hsl(354, 70%, 54%) !important;
+
+            color: hsl(354, 70%, 54%) !important;
+        }
+
+
+        /* CANCEL BUTTON */
+        #renameModal .btn-secondary,
+        #deleteModal .btn-secondary {
+
+            background: transparent !important;
+            border: none !important;
+
+            border-radius: 999px !important;
+
+            box-shadow: none !important;
+        }
+
+        /* hover */
+        #renameModal .btn-secondary:hover,
+        #deleteModal .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.05) !important;
+        }
+
+
+        /* =========================
+        LIGHT THEME
+        ========================= */
+
+        body.theme-light #renameModal .btn-primary {
+
+            color: #212529 !important;
+            border-color: #cfd4da !important;
+        }
+
+
+        /* DELETE BUTTON */
+        body.theme-light #deleteModal .btn-danger {
+
+            color: hsl(354, 70%, 54%) !important;
+
+            border-color: hsl(354, 70%, 54%) !important;
+        }
+
+        body.theme-light #renameModal .btn-primary:hover,
+        body.theme-light #deleteModal .btn-danger:hover {
+            background-color: rgba(0,0,0,0.04) !important;
+        }
+
+        body.theme-light #renameModal .btn-secondary:hover,
+        body.theme-light #deleteModal .btn-secondary:hover {
+            background-color: rgba(0,0,0,0.04) !important;
+        }
+        .back-link {
+            color: #ffffff;
+        }
+
+        body.theme-light .back-link {
+            color: #212529;
+        }
+        body.theme-light .markdown-body,
+        body.theme-light .markdown-body p,
+        body.theme-light .markdown-body li,
+        body.theme-light .markdown-body strong,
+        body.theme-light .markdown-body b,
+        body.theme-light .markdown-body h1,
+        body.theme-light .markdown-body h2,
+        body.theme-light .markdown-body h3,
+        body.theme-light .markdown-body h4,
+        body.theme-light .markdown-body h5,
+        body.theme-light .markdown-body h6 {
+            color: #212529 !important;
+        }
+        body.theme-light .markdown-body code {
+            color: #212529 !important;
+            background-color: #e9ecef !important;
+        }
     </style>
 </head>
 <body class="{% if theme == 'light' %}theme-light{% endif %}">
@@ -512,635 +857,721 @@
     <div class="container-fluid px-3">
         <a class="navbar-brand fw-semibold" href="{{ url_for('index') }}">Nexus</a>
         <div class="d-flex align-items-center">
-            <span class="navbar-text me-3 text-light d-none d-sm-inline" style="font-size: 0.9rem;">{{ current_user.username }}</span>
-            <a href="{{ url_for('logout') }}" class="nav-link">Выйти</a>
+            <span class="navbar-text me-3 d-none d-sm-inline username-text" style="font-size: 0.9rem;">{{ current_user.username }}</span>
         </div>
     </div>
 </nav>
 
 <div class="d-flex" style="height: calc(100vh - 70px); overflow: hidden;">
     <!-- Sidebar -->
-    <div class="sidebar" style="width: 260px; background-color: #1e1f20; border-right: 1px solid #444746; flex-shrink: 0; display: flex; flex-direction: column;">
+    <div class="sidebar"
+         style="width: 260px; background-color: #1e1f20; border-right: 1px solid #444746; flex-shrink: 0; display: flex; flex-direction: column;">
         <div style="padding: 15px; overflow-y: auto; flex-grow: 1; display: flex; flex-direction: column;">
-            <a href="{{ url_for('new_chat') }}" class="btn w-100 mb-3" style="background-color: transparent; border: 1px solid #444746; color: #e3e3e3; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            <a href="{{ url_for('new_chat') }}" class="btn w-100 mb-3"
+               style="background-color: transparent; border: 1px solid #444746; color: #e3e3e3; display: flex; align-items: center; justify-content: flex-start; padding-left: 14px; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                </svg>
                 Новый чат
             </a>
-            <div class="text-uppercase mb-2" style="font-size: 0.75rem; color: #8e918f; font-weight: 600; letter-spacing: 0.5px; padding-left: 5px;">История чатов</div>
+            <div class="text-uppercase mb-2"
+                 style="font-size: 0.75rem; color: #8e918f; font-weight: 600; letter-spacing: 0.5px; padding-left: 5px;">
+                История чатов
+            </div>
             <div class="chat-list" style="display: flex; flex-direction: column; gap: 5px;">
                 {% for c in all_chats %}
-                <div class="chat-history-item {% if current_chat and current_chat.id == c.id %}active{% endif %}" data-chat-id="{{ c.id }}" onclick="window.location.href='{{ url_for('chat_view', chat_id=c.id) }}'">
+                <div class="chat-history-item {% if current_chat and current_chat.id == c.id %}active{% endif %}"
+                     data-chat-id="{{ c.id }}"
+                     onclick="window.location.href='{{ url_for('chat_view', chat_id=c.id) }}'">
                     <span class="chat-title-text">{{ c.title }}</span>
                     <div class="sidebar-actions dropdown" onclick="event.stopPropagation()">
                         <button class="sidebar-btn" data-bs-toggle="dropdown" aria-expanded="false" title="Действия">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                                 fill="currentColor">
+                                <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                            </svg>
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-dark shadow" style="background-color: #282a2c; border-color: #444746; font-size: 0.9rem;">
-                            <li><a class="dropdown-item" href="#" style="color: #e3e3e3;" onclick="openRenameModal({{ c.id }}, '{{ c.title }}'); return false;">Переименовать</a></li>
-                            <li><a class="dropdown-item text-danger" href="#" onclick="openDeleteModal({{ c.id }}); return false;">Удалить</a></li>
+                        <ul class="dropdown-menu dropdown-menu-dark shadow"
+                            style="background-color: #282a2c; border-color: #444746; font-size: 0.9rem;">
+                            <li><a class="dropdown-item" href="#" style="color: #e3e3e3;"
+                                   onclick="openRenameModal({{ c.id }}, '{{ c.title }}'); return false;">Переименовать</a>
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="#"
+                                   onclick="openDeleteModal({{ c.id }}); return false;">Удалить</a></li>
                         </ul>
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
-        <div style="padding: 15px; border-top: 1px solid #444746;">
-            <button class="btn w-100" style="background-color: transparent; color: #c4c7c5; display: flex; align-items: center; gap: 10px; border: none; padding: 10px; border-radius: 8px; transition: background-color 0.2s;" onclick="openSettingsModal()">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.73,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.43-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.49-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>
+        <div style="padding: 15px;">
+            <button class="btn w-100"
+                    style="background-color: transparent; color: #c4c7c5; display: flex; align-items: center; gap: 10px; border: none; padding: 10px; border-radius: 8px; transition: background-color 0.2s;"
+                    onclick="openSettingsModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.73,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.43-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.49-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                </svg>
                 Настройки
             </button>
+            <a href="{{ url_for('logout') }}"
+               class="btn w-100"
+               style="
+                background-color: transparent;
+                color: hsl(354, 70%, 54%) !important;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                border: none;
+                padding: 10px;
+                border-radius: 8px;
+                transition: background-color 0.2s;
+                text-decoration: none;
+                margin-top: 4px;
+            ">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 24 24"
+                     width="20"
+                     height="20"
+                     fill="currentColor">
+                    <path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.1 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+                </svg>
+
+                Выйти
+            </a>
         </div>
     </div>
 
     <!-- Main Chat Area -->
     <div class="chat-container flex-grow-1" style="height: 100%;">
         {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
+        {% if messages %}
         <div style="max-width: 850px; width: 100%; margin: 0 auto; padding: 0 20px;">
-        {% for category, message in messages %}
-          <div class="alert alert-{{ category }} mt-3 text-white border-0" style="background-color: #332d2d; border-radius: 12px; padding: 10px 15px;">
-              {{ message }}
-          </div>
-        {% endfor %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} mt-3 text-white border-0"
+                 style="background-color: #332d2d; border-radius: 12px; padding: 10px 15px;">
+                {{ message }}
+            </div>
+            {% endfor %}
         </div>
-      {% endif %}
-    {% endwith %}
+        {% endif %}
+        {% endwith %}
 
-    <div class="chat-history" id="chatHistory">
-        {% if not messages %}
+        <div class="chat-history" id="chatHistory">
+            {% if not messages %}
             <div class="empty-state">
                 <div class="nexus-gradient-text">Чем я могу помочь?</div>
             </div>
-        {% else %}
+            {% else %}
             {% for msg in messages %}
-                {% if msg.role == 'user' %}
-                    <div class="message-row msg-user-container">
-                        <div style="display: flex; flex-direction: column; align-items: flex-end; max-width: 85%;">
-                            <div class="message-bubble msg-user" style="max-width: 100%;">
-                                <div class="raw-user-msg" style="display: none;">{{ msg.content }}</div>
-                                <div class="parsed-user-msg"></div>
-                            </div>
-                            <div class="message-actions">
-                                <button class="action-btn" title="Редактировать" onclick="editMessage({{ msg.id }}, '{{ msg.content | replace('\n', '\\n') | replace('\'', '\\\'') | replace('\"', '&quot;') }}')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="user-avatar">
-                            {{ current_user.username[0] | upper }}
-                        </div>
+            {% if msg.role == 'user' %}
+            <div class="message-row msg-user-container">
+                <div style="display: flex; flex-direction: column; align-items: flex-end; max-width: 85%;">
+                    <div class="message-bubble msg-user" style="max-width: 100%;">
+                        <div class="raw-user-msg" style="display: none;">{{ msg.content }}</div>
+                        <div class="parsed-user-msg"></div>
                     </div>
-                {% else %}
-                    <div class="message-row msg-assistant-container">
-                        <div class="assistant-avatar">
-                            <span class="nexus-star">✦</span>
-                        </div>
-                        <div class="assistant-content">
-                            <div class="message-bubble msg-assistant markdown-body">
-                                <div class="raw-markdown" style="display: none;">{{ msg.content }}</div>
-                                <div class="parsed-markdown"></div>
-                            </div>
-                            <div class="message-actions">
-                                <button class="action-btn" title="Копировать" onclick="copyMessage(this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                                </button>
-                                <button class="action-btn" title="Перегенерировать" onclick="regenerateResponse()">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="message-actions">
+                        <button class="action-btn" title="Редактировать"
+                                onclick="editMessage({{ msg.id }}, '{{ msg.content | replace('\n', '\\n') | replace('\'', '\\\'') | replace('\"
+                        ', '&quot;') }}')">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                        </button>
                     </div>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-        
-        <div class="loader" id="aiLoader">
-            <div class="message-row msg-assistant-container mb-0">
-                <div class="assistant-avatar loader-avatar">
+                </div>
+                <div class="user-avatar">
+                    {{ current_user.username[0] | upper }}
+                </div>
+            </div>
+            {% else %}
+            <div class="message-row msg-assistant-container">
+                <div class="assistant-avatar">
                     <span class="nexus-star">✦</span>
                 </div>
-                <div class="message-bubble msg-assistant assistant-content">
-                    <div style="display: flex; align-items: center;">
-                        <span style="color: #8e918f; font-size: 0.95rem; margin-right: 10px;" id="thinkingText">Nexus думает</span>
-                        <div class="loader-dots" style="margin-top: 0;">
-                            <span></span><span></span><span></span>
+                <div class="assistant-content">
+                    <div class="message-bubble msg-assistant markdown-body">
+                        <div class="raw-markdown" style="display: none;">{{ msg.content }}</div>
+                        <div class="parsed-markdown"></div>
+                    </div>
+                    <div class="message-actions">
+                        <button class="action-btn" title="Копировать" onclick="copyMessage(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                            </svg>
+                        </button>
+                        <button class="action-btn" title="Перегенерировать" onclick="regenerateResponse()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            <div class="loader" id="aiLoader">
+                <div class="message-row msg-assistant-container mb-0">
+                    <div class="assistant-avatar loader-avatar">
+                        <span class="nexus-star">✦</span>
+                    </div>
+                    <div class="message-bubble msg-assistant assistant-content">
+                        <div style="display: flex; align-items: center; height: 32px;">
+                            <span style="color: #8e918f; font-size: 0.95rem; margin-right: 10px;" id="thinkingText">Nexus думает</span>
+                            <div class="loader-dots" style="margin-top: 0;">
+                                <span></span><span></span><span></span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="input-container">
-        <form method="POST" enctype="multipart/form-data" class="chat-form" id="chatForm">
-            <div class="file-upload-wrapper">
-                <label for="fileUpload" class="file-upload-btn" title="Прикрепить файл (.txt, .csv)">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5a2.5 2.5 0 0 1 5 0v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5a2.5 2.5 0 0 0 5 0V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg>
-                </label>
-                <input type="file" id="fileUpload" name="file" accept=".txt,.csv">
-            </div>
-            <textarea class="form-control bg-transparent border-0 shadow-none text-white" name="message" rows="1" placeholder="Введите запрос к Nexus..." id="messageInput"></textarea>
-            <div class="file-name-display" id="fileNameDisplay"></div>
-            <button type="submit" class="btn-send" title="Отправить" id="sendButton">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-            </button>
-            <button type="button" class="btn-stop" title="Остановить генерацию" id="stopButton">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
-            </button>
-        </form>
-    </div>
-</div>
-
-<!-- Rename Modal -->
-<div class="modal fade" id="renameModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-light" style="background-color: #1e1f20; border: 1px solid #444746;">
-      <div class="modal-header border-bottom-0">
-        <h5 class="modal-title">Переименовать чат</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <input type="text" class="form-control bg-transparent text-light" id="newChatTitleInput" style="border: 1px solid #444746;">
-      </div>
-      <div class="modal-footer border-top-0">
-        <button type="button" class="btn btn-secondary" style="background-color: transparent; border: 1px solid #444746;" data-bs-dismiss="modal">Отмена</button>
-        <button type="button" class="btn btn-primary" onclick="submitRenameChat()">Сохранить</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-light" style="background-color: #1e1f20; border: 1px solid #444746;">
-      <div class="modal-header border-bottom-0">
-        <h5 class="modal-title">Удалить чат?</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Вы уверены, что хотите удалить этот чат? Это действие нельзя отменить.
-      </div>
-      <div class="modal-footer border-top-0">
-        <button type="button" class="btn btn-secondary" style="background-color: transparent; border: 1px solid #444746;" data-bs-dismiss="modal">Отмена</button>
-        <button type="button" class="btn btn-danger" onclick="submitDeleteChat()">Удалить</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Settings Modal -->
-<div class="modal fade" id="settingsModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-light" style="background-color: #1e1f20; border: 1px solid #444746;">
-      <div class="modal-header border-bottom-0">
-        <h5 class="modal-title">Настройки</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-            <label for="themeSelect" class="form-label">Тема оформления</label>
-            <select class="form-select custom-select-theme" id="themeSelect">
-                <option value="dark">Тёмная</option>
-                <option value="light">Светлая</option>
-            </select>
+        <div class="input-container">
+            <form method="POST" enctype="multipart/form-data" class="chat-form" id="chatForm">
+                <div class="file-upload-wrapper">
+                    <label for="fileUpload" class="file-upload-btn" title="Прикрепить файл (.txt, .csv)">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5a2.5 2.5 0 0 1 5 0v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5a2.5 2.5 0 0 0 5 0V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/>
+                        </svg>
+                    </label>
+                    <input type="file" id="fileUpload" name="file" accept=".txt,.csv">
+                </div>
+                <textarea class="form-control bg-transparent border-0 shadow-none text-white" name="message" rows="1"
+                          placeholder="Введите запрос к Nexus..." id="messageInput"></textarea>
+                <div class="file-name-display" id="fileNameDisplay"></div>
+                <button type="submit" class="btn-send" title="Отправить" id="sendButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+                <button type="button" class="btn-stop" title="Остановить генерацию" id="stopButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M6 6h12v12H6z"/>
+                    </svg>
+                </button>
+            </form>
         </div>
-      </div>
-      <div class="modal-footer border-top-0">
-        <button type="button" class="btn btn-secondary" style="background-color: transparent; border: 1px solid #444746;" data-bs-dismiss="modal">Отмена</button>
-        <button type="button" class="btn btn-primary" onclick="saveSettings()">Сохранить</button>
-      </div>
     </div>
-  </div>
-</div>
 
-<script>
-    let settingsModalInstance = null;
+    <!-- Rename Modal -->
+    <div class="modal fade" id="renameModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-light" style="background-color: #1e1f20; border: 1px solid #444746;">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title">Переименовать чат</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control bg-transparent text-light" id="newChatTitleInput"
+                           style="border: 1px solid #444746;">
+                </div>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-secondary"
+                            style="background-color: transparent; border: 1px solid #444746;" data-bs-dismiss="modal">
+                        Отмена
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="submitRenameChat()">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    function openSettingsModal() {
-        if (!settingsModalInstance) {
-            settingsModalInstance = new bootstrap.Modal(document.getElementById('settingsModal'));
-        }
-        fetch('/settings')
-            .then(r => r.json())
-            .then(data => {
-                document.getElementById('themeSelect').value = data.theme || 'dark';
-                settingsModalInstance.show();
-            });
-    }
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-light" style="background-color: #1e1f20; border: 1px solid #444746;">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title">Удалить чат?</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите удалить этот чат? Это действие нельзя отменить.
+                </div>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-secondary"
+                            style="background-color: transparent; border: 1px solid #444746;" data-bs-dismiss="modal">
+                        Отмена
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="submitDeleteChat()">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    function saveSettings() {
-        const theme = document.getElementById('themeSelect').value;
-        
-        fetch('/settings', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            body: JSON.stringify({
-                theme: theme
-            })
-        }).then(r => r.json()).then(data => {
-            if (data.success) {
-                settingsModalInstance.hide();
-                if (theme === 'light') {
-                    document.body.classList.add('theme-light');
-                } else {
-                    document.body.classList.remove('theme-light');
-                }
-            } else {
-                alert("Ошибка при сохранении: " + (data.error || "Неизвестная ошибка"));
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-light" style="background-color: #1e1f20; border: 1px solid #444746;">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title">Настройки</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <div style="font-weight: 500;">Светлая тема</div>
+                            <div style="font-size: 0.85rem; color: #8e918f;">
+                                Переключение оформления интерфейса
+                            </div>
+                        </div>
+
+                        <div class="form-check form-switch m-0">
+                            <input class="form-check-input custom-theme-switch"
+                                   type="checkbox"
+                                   id="themeSwitch">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-secondary"
+                            style="background-color: transparent; border: 1px solid #444746;" data-bs-dismiss="modal">
+                        Отмена
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="saveSettings()">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let settingsModalInstance = null;
+
+        function openSettingsModal() {
+            if (!settingsModalInstance) {
+                settingsModalInstance = new bootstrap.Modal(document.getElementById('settingsModal'));
             }
-        });
-    }
-
-    let currentRenameChatId = null;
-    let renameModalInstance = null;
-
-    function openRenameModal(chatId, currentTitle) {
-        currentRenameChatId = chatId;
-        document.getElementById('newChatTitleInput').value = currentTitle;
-        if (!renameModalInstance) {
-            renameModalInstance = new bootstrap.Modal(document.getElementById('renameModal'));
+            fetch('/settings')
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById('themeSwitch').checked =
+                        (data.theme || 'dark') === 'light';
+                    settingsModalInstance.show();
+                });
         }
-        renameModalInstance.show();
-    }
 
-    function submitRenameChat() {
-        var newTitle = document.getElementById('newChatTitleInput').value;
-        if (newTitle && newTitle.trim() !== "" && currentRenameChatId) {
-            fetch('/chat/' + currentRenameChatId + '/rename', {
+        function saveSettings() {
+            const isLight = document.getElementById('themeSwitch').checked;
+            const theme = isLight ? 'light' : 'dark';
+
+            fetch('/settings', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest'
                 },
-                body: JSON.stringify({title: newTitle})
-            }).then(r => r.json()).then(data => {
+                body: JSON.stringify({
+                    theme: theme
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
                 if (data.success) {
-                    location.reload();
+
+                    if (theme === 'light') {
+                        document.body.classList.add('theme-light');
+                    } else {
+                        document.body.classList.remove('theme-light');
+                    }
+
+                    settingsModalInstance.hide();
+
                 } else {
-                    alert("Ошибка при переименовании: " + (data.error || "Неизвестная ошибка"));
+                    alert("Ошибка при сохранении");
                 }
             });
         }
-    }
 
-    let currentDeleteChatId = null;
-    let deleteModalInstance = null;
+        let currentRenameChatId = null;
+        let renameModalInstance = null;
 
-    function openDeleteModal(chatId) {
-        currentDeleteChatId = chatId;
-        if (!deleteModalInstance) {
-            deleteModalInstance = new bootstrap.Modal(document.getElementById('deleteModal'));
+        function openRenameModal(chatId, currentTitle) {
+            currentRenameChatId = chatId;
+            document.getElementById('newChatTitleInput').value = currentTitle;
+            if (!renameModalInstance) {
+                renameModalInstance = new bootstrap.Modal(document.getElementById('renameModal'));
+            }
+            renameModalInstance.show();
         }
-        deleteModalInstance.show();
-    }
 
-    function submitDeleteChat() {
-        if (currentDeleteChatId) {
-            fetch('/chat/' + currentDeleteChatId + '/delete', {
+        function submitRenameChat() {
+            var newTitle = document.getElementById('newChatTitleInput').value;
+            if (newTitle && newTitle.trim() !== "" && currentRenameChatId) {
+                fetch('/chat/' + currentRenameChatId + '/rename', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({title: newTitle})
+                }).then(r => r.json()).then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert("Ошибка при переименовании: " + (data.error || "Неизвестная ошибка"));
+                    }
+                });
+            }
+        }
+
+        let currentDeleteChatId = null;
+        let deleteModalInstance = null;
+
+        function openDeleteModal(chatId) {
+            currentDeleteChatId = chatId;
+            if (!deleteModalInstance) {
+                deleteModalInstance = new bootstrap.Modal(document.getElementById('deleteModal'));
+            }
+            deleteModalInstance.show();
+        }
+
+        function submitDeleteChat() {
+            if (currentDeleteChatId) {
+                fetch('/chat/' + currentDeleteChatId + '/delete', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                }).then(r => r.json()).then(data => {
+                    if (data.success) {
+                        window.location.href = "{{ url_for('chat_redirect') }}";
+                    } else {
+                        alert("Ошибка при удалении");
+                    }
+                });
+            }
+        }
+
+        function copyMessage(btn) {
+            var contentDiv = btn.closest('.assistant-content').querySelector('.parsed-markdown');
+            if (!contentDiv) contentDiv = btn.closest('.assistant-content').querySelector('.markdown-body');
+            var text = contentDiv.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                var originalHtml = btn.innerHTML;
+                btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
+                setTimeout(() => { btn.innerHTML = originalHtml; }, 2000);
+            });
+        }
+
+        function regenerateResponse() {
+            if (confirm("Удалить последний ответ и сгенерировать заново?")) {
+                var formData = new FormData();
+                formData.append('action', 'regenerate');
+                submitActionForm(formData);
+            }
+        }
+
+        function editMessage(msgId, currentText) {
+            var input = document.getElementById('messageInput');
+            input.value = currentText;
+            input.focus();
+            input.dataset.editMsgId = msgId;
+        }
+
+        function submitActionForm(formData) {
+            var emptyState = document.querySelector('.empty-state');
+            if (emptyState) emptyState.style.display = 'none';
+
+            aiLoader.style.display = 'flex';
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            messageInput.readOnly = true;
+            if (sendButton) sendButton.style.display = 'none';
+            if (stopButton) stopButton.style.display = 'flex';
+            messageInput.placeholder = "Nexus генерирует ответ...";
+
+            currentAbortController = new AbortController();
+
+            fetch(window.location.pathname, {
                 method: 'POST',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: formData,
+                signal: currentAbortController.signal
+            })
+            .then(response => {
+                if(response.redirected) {
+                    window.location.href = response.url;
+                    return;
                 }
-            }).then(r => r.json()).then(data => {
+                return response.json();
+            })
+            .then(data => {
+                if(!data) return;
                 if (data.success) {
-                    window.location.href = "{{ url_for('chat_redirect') }}";
+                    location.reload(); // Для простоты при редактировании/перегенерации перезагружаем страницу, чтобы обновить историю
                 } else {
-                    alert("Ошибка при удалении");
+                    resetUI();
+                    alert("Ошибка: " + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resetUI();
+                if (error.name !== 'AbortError') {
+                    location.reload();
                 }
             });
         }
-    }
 
-    function copyMessage(btn) {
-        var contentDiv = btn.closest('.assistant-content').querySelector('.parsed-markdown');
-        if (!contentDiv) contentDiv = btn.closest('.assistant-content').querySelector('.markdown-body');
-        var text = contentDiv.innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            var originalHtml = btn.innerHTML;
-            btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
-            setTimeout(() => { btn.innerHTML = originalHtml; }, 2000);
-        });
-    }
+        try {
+            document.querySelectorAll('.raw-user-msg').forEach(function(el) {
+                var text = el.textContent;
+                var fileRegex = /\[(?:Прикреплен файл:|Содержимое загруженного файла\s|FILE_ATTACHMENT:)\s*(.+?)\](?:[\s\S]*)/;
+                var match = text.match(fileRegex);
+                if (match) {
+                    var fileName = match[1].trim();
+                    if (fileName.endsWith(':')) fileName = fileName.slice(0, -1);
+                    var cleanText = text.replace(/\[(?:Прикреплен файл:|Содержимое загруженного файла\s|FILE_ATTACHMENT:)\s*(.+?)\][\s\S]*/, '').trim();
+                    var html = '';
+                    if (cleanText) {
+                        html += '<div>' + cleanText.replace(/\n/g, '<br>') + '</div>';
+                    }
+                    html += '<div class="file-attachment-badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5a2.5 2.5 0 0 1 5 0v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5a2.5 2.5 0 0 0 5 0V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg>' + fileName + '</div>';
+                    el.nextElementSibling.innerHTML = html;
+                } else {
+                    el.nextElementSibling.innerHTML = text.replace(/\n/g, '<br>');
+                }
+            });
 
-    function regenerateResponse() {
-        if (confirm("Удалить последний ответ и сгенерировать заново?")) {
-            var formData = new FormData();
-            formData.append('action', 'regenerate');
-            submitActionForm(formData);
+            document.querySelectorAll('.raw-markdown').forEach(function(el) {
+                el.nextElementSibling.innerHTML = marked.parse(el.textContent);
+            });
+        } catch (e) {
+            console.error("Parsing error:", e);
         }
-    }
+        if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+            window.MathJax.typesetPromise().catch((err) => console.log('MathJax error:', err));
+        }
 
-    function editMessage(msgId, currentText) {
-        var input = document.getElementById('messageInput');
-        input.value = currentText;
-        input.focus();
-        input.dataset.editMsgId = msgId;
-    }
-
-    function submitActionForm(formData) {
-        var emptyState = document.querySelector('.empty-state');
-        if (emptyState) emptyState.style.display = 'none';
-
-        aiLoader.style.display = 'flex';
+        var chatHistory = document.getElementById("chatHistory");
         chatHistory.scrollTop = chatHistory.scrollHeight;
 
-        messageInput.readOnly = true;
-        if (sendButton) sendButton.style.display = 'none';
-        if (stopButton) stopButton.style.display = 'flex';
-        messageInput.placeholder = "Nexus генерирует ответ...";
+        var fileUpload = document.getElementById('fileUpload');
+        var fileNameDisplay = document.getElementById('fileNameDisplay');
 
-        currentAbortController = new AbortController();
-
-        fetch(window.location.pathname, {
-            method: 'POST',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            body: formData,
-            signal: currentAbortController.signal
-        })
-        .then(response => {
-            if(response.redirected) {
-                window.location.href = response.url;
-                return;
-            }
-            return response.json();
-        })
-        .then(data => {
-            if(!data) return;
-            if (data.success) {
-                location.reload(); // Для простоты при редактировании/перегенерации перезагружаем страницу, чтобы обновить историю
+        fileUpload.addEventListener('change', function(e) {
+            if(e.target.files.length > 0) {
+                fileNameDisplay.textContent = e.target.files[0].name;
             } else {
-                resetUI();
-                alert("Ошибка: " + data.error);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            resetUI();
-            if (error.name !== 'AbortError') {
-                location.reload();
-            }
-        });
-    }
-
-    try {
-        document.querySelectorAll('.raw-user-msg').forEach(function(el) {
-            var text = el.textContent;
-            var fileRegex = /\[(?:Прикреплен файл:|Содержимое загруженного файла\s|FILE_ATTACHMENT:)\s*(.+?)\](?:[\s\S]*)/;
-            var match = text.match(fileRegex);
-            if (match) {
-                var fileName = match[1].trim();
-                if (fileName.endsWith(':')) fileName = fileName.slice(0, -1);
-                var cleanText = text.replace(/\[(?:Прикреплен файл:|Содержимое загруженного файла\s|FILE_ATTACHMENT:)\s*(.+?)\][\s\S]*/, '').trim();
-                var html = '';
-                if (cleanText) {
-                    html += '<div>' + cleanText.replace(/\n/g, '<br>') + '</div>';
-                }
-                html += '<div class="file-attachment-badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5a2.5 2.5 0 0 1 5 0v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5a2.5 2.5 0 0 0 5 0V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg>' + fileName + '</div>';
-                el.nextElementSibling.innerHTML = html;
-            } else {
-                el.nextElementSibling.innerHTML = text.replace(/\n/g, '<br>');
+                fileNameDisplay.textContent = '';
             }
         });
 
-        document.querySelectorAll('.raw-markdown').forEach(function(el) {
-            el.nextElementSibling.innerHTML = marked.parse(el.textContent);
-        });
-    } catch (e) {
-        console.error("Parsing error:", e);
-    }
-    if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
-        window.MathJax.typesetPromise().catch((err) => console.log('MathJax error:', err));
-    }
+        var messageInput = document.getElementById('messageInput');
+        var chatForm = document.getElementById('chatForm');
+        var aiLoader = document.getElementById('aiLoader');
+        var sendButton = document.getElementById('sendButton');
+        var stopButton = document.getElementById('stopButton');
+        var thinkingText = document.getElementById('thinkingText');
 
-    var chatHistory = document.getElementById("chatHistory");
-    chatHistory.scrollTop = chatHistory.scrollHeight;
+        var currentAbortController = null;
+        var currentTypingAnimation = null;
+        var currentContentDiv = null;
 
-    var fileUpload = document.getElementById('fileUpload');
-    var fileNameDisplay = document.getElementById('fileNameDisplay');
-    
-    fileUpload.addEventListener('change', function(e) {
-        if(e.target.files.length > 0) {
-            fileNameDisplay.textContent = e.target.files[0].name;
-        } else {
-            fileNameDisplay.textContent = '';
-        }
-    });
-
-    var messageInput = document.getElementById('messageInput');
-    var chatForm = document.getElementById('chatForm');
-    var aiLoader = document.getElementById('aiLoader');
-    var sendButton = document.getElementById('sendButton');
-    var stopButton = document.getElementById('stopButton');
-    var thinkingText = document.getElementById('thinkingText');
-
-    var currentAbortController = null;
-    var currentTypingAnimation = null;
-    var currentContentDiv = null;
-
-    function resetUI() {
-        aiLoader.style.display = 'none';
-        messageInput.readOnly = false;
-        messageInput.placeholder = "Введите запрос к Nexus...";
-        if (sendButton) sendButton.style.display = 'flex';
-        if (stopButton) stopButton.style.display = 'none';
-        messageInput.focus();
-    }
-
-    if (stopButton) {
-        stopButton.addEventListener('click', function() {
-            if (currentAbortController) {
-                currentAbortController.abort();
-                currentAbortController = null;
-                resetUI();
-                
-                var cancelRow = document.createElement('div');
-                cancelRow.className = 'message-row msg-assistant-container';
-                cancelRow.innerHTML = `
-                    <div class="assistant-avatar">
-                        <span class="nexus-star">✦</span>
-                    </div>
-                    <div class="message-bubble msg-assistant assistant-content">
-                        <em style="color: #8e918f;">[Запрос отменен пользователем]</em>
-                    </div>
-                `;
-                chatHistory.insertBefore(cancelRow, aiLoader);
-                chatHistory.scrollTop = chatHistory.scrollHeight;
-            } 
-            else if (currentTypingAnimation) {
-                cancelAnimationFrame(currentTypingAnimation);
-                currentTypingAnimation = null;
-                resetUI();
-                
-                if (currentContentDiv) {
-                    currentContentDiv.innerHTML += '<br><br><em style="color: #8e918f;">[Генерация остановлена]</em>';
-                }
-            }
-        });
-    }
-
-    messageInput.addEventListener('input', function() {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
-        if(this.value === '') {
-            this.style.height = 'auto';
-        }
-    });
-
-    chatForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        if (messageInput.dataset.editMsgId) {
-            var formData = new FormData(chatForm);
-            formData.append('action', 'edit');
-            formData.append('message_id', messageInput.dataset.editMsgId);
-            delete messageInput.dataset.editMsgId;
-            submitActionForm(formData);
-            return;
-        }
-        
-        var msgText = messageInput.value.trim();
-        var files = fileUpload.files;
-        
-        if (msgText === '' && files.length === 0) return;
-
-        var emptyState = document.querySelector('.empty-state');
-        if (emptyState) emptyState.style.display = 'none';
-
-        var displayMsg = msgText;
-        var fileHtml = "";
-        if (files.length > 0) {
-            fileHtml = '<div class="file-attachment-badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5a2.5 2.5 0 0 1 5 0v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5a2.5 2.5 0 0 0 5 0V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg>' + files[0].name + '</div>';
-        }
-        
-        var safeText = document.createElement('div');
-        safeText.innerText = displayMsg;
-        displayMsg = safeText.innerHTML.replace(/\n/g, '<br>');
-
-        var userRow = document.createElement('div');
-        userRow.className = 'message-row msg-user-container';
-        userRow.innerHTML = '<div class="message-bubble msg-user">' + (displayMsg ? '<div>' + displayMsg + '</div>' : '') + fileHtml + '</div>';
-        chatHistory.insertBefore(userRow, aiLoader);
-
-        aiLoader.style.display = 'flex';
-        chatHistory.scrollTop = chatHistory.scrollHeight;
-
-        messageInput.readOnly = true;
-        if (sendButton) sendButton.style.display = 'none';
-        if (stopButton) stopButton.style.display = 'flex';
-        messageInput.placeholder = "Nexus генерирует ответ...";
-        if (thinkingText) {
-            thinkingText.innerText = "Nexus думает";
-        }
-
-        var formData = new FormData(chatForm);
-        chatForm.reset();
-        fileNameDisplay.textContent = '';
-        messageInput.style.height = 'auto';
-
-        currentAbortController = new AbortController();
-
-        fetch(window.location.pathname, {
-            method: 'POST',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            body: formData,
-            signal: currentAbortController.signal
-        })
-        .then(response => response.json())
-        .then(data => {
-            currentAbortController = null;
+        function resetUI() {
             aiLoader.style.display = 'none';
-            
-            if (data.error) {
-                resetUI();
-                alert("Ошибка: " + data.error);
+            messageInput.readOnly = false;
+            messageInput.placeholder = "Введите запрос к Nexus...";
+            if (sendButton) sendButton.style.display = 'flex';
+            if (stopButton) stopButton.style.display = 'none';
+            messageInput.focus();
+        }
+
+        if (stopButton) {
+            stopButton.addEventListener('click', function() {
+                if (currentAbortController) {
+                    currentAbortController.abort();
+                    currentAbortController = null;
+                    resetUI();
+
+                    var cancelRow = document.createElement('div');
+                    cancelRow.className = 'message-row msg-assistant-container';
+                    cancelRow.innerHTML = `
+                        <div class="assistant-avatar">
+                            <span class="nexus-star">✦</span>
+                        </div>
+                        <div class="message-bubble msg-assistant assistant-content">
+                            <em style="color: #8e918f;">[Запрос отменен пользователем]</em>
+                        </div>
+                    `;
+                    chatHistory.insertBefore(cancelRow, aiLoader);
+                    chatHistory.scrollTop = chatHistory.scrollHeight;
+                }
+                else if (currentTypingAnimation) {
+                    cancelAnimationFrame(currentTypingAnimation);
+                    currentTypingAnimation = null;
+                    resetUI();
+
+                    if (currentContentDiv) {
+                        currentContentDiv.innerHTML += '<br><br><em style="color: #8e918f;">[Генерация остановлена]</em>';
+                    }
+                }
+            });
+        }
+
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+            if(this.value === '') {
+                this.style.height = 'auto';
+            }
+        });
+
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (messageInput.dataset.editMsgId) {
+                var formData = new FormData(chatForm);
+                formData.append('action', 'edit');
+                formData.append('message_id', messageInput.dataset.editMsgId);
+                delete messageInput.dataset.editMsgId;
+                submitActionForm(formData);
                 return;
             }
 
-            if (data.message !== undefined) {
-                var aiRow = document.createElement('div');
-                aiRow.className = 'message-row msg-assistant-container';
-                
-                var reasoningHtml = '';
-                if (data.reasoning) {
-                    var reasoningClean = data.reasoning.replace(/\n/g, ' ');
-                    var snippet = reasoningClean.length > 60 ? reasoningClean.substring(0, 60) + '...' : reasoningClean;
-                    reasoningHtml = '<div class="markdown-body"><details><summary>Мысли Nexus: <span style="opacity: 0.7; font-size: 0.9em; font-weight: normal;">' + snippet + '</span></summary>\n\n' + marked.parse(data.reasoning) + '\n</details></div>\n\n';
-                }
+            var msgText = messageInput.value.trim();
+            var files = fileUpload.files;
 
-                if (data.chat_title_updated && data.new_title) {
-                    var activeItem = document.querySelector('.chat-history-item.active .chat-title-text');
-                    if (activeItem) {
-                        activeItem.textContent = data.new_title;
-                    }
-                }
+            if (msgText === '' && files.length === 0) return;
 
-                aiRow.innerHTML = `                    <div class="assistant-avatar">
-                        <span class="nexus-star">✦</span>
-                    </div>
-                    <div class="message-bubble msg-assistant assistant-content">
-                        ${reasoningHtml}
-                        <div class="markdown-body"></div>
-                    </div>
-                `;
-                chatHistory.insertBefore(aiRow, aiLoader);
-                
-                var markdownBodies = aiRow.querySelectorAll('.markdown-body');
-                currentContentDiv = markdownBodies[markdownBodies.length - 1];
-                var fullText = data.message;
-                var currentIndex = 0;
-                
-                function typeWriter() {
-                    if (currentIndex < fullText.length) {
-                        currentIndex += Math.floor(Math.random() * 4) + 2;
-                        if (currentIndex > fullText.length) currentIndex = fullText.length;
-                        
-                        currentContentDiv.innerHTML = marked.parse(fullText.substring(0, currentIndex));
-                        chatHistory.scrollTop = chatHistory.scrollHeight;
-                        
-                        currentTypingAnimation = requestAnimationFrame(typeWriter);
-                    } else {
-                        currentTypingAnimation = null;
-                        if (window.MathJax) {
-                            window.MathJax.typesetPromise([currentContentDiv]).catch((err) => console.log('MathJax error:', err));
-                        }
-                        resetUI();
-                        chatHistory.scrollTop = chatHistory.scrollHeight;
-                    }
-                }
-                
-                typeWriter();
-            } else {
-                resetUI();
+            var emptyState = document.querySelector('.empty-state');
+            if (emptyState) emptyState.style.display = 'none';
+
+            var displayMsg = msgText;
+            var fileHtml = "";
+            if (files.length > 0) {
+                fileHtml = '<div class="file-attachment-badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5a2.5 2.5 0 0 1 5 0v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5a2.5 2.5 0 0 0 5 0V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg>' + files[0].name + '</div>';
             }
-        })
-        .catch(error => {
-            if (error.name === 'AbortError') {
-                console.log('Fetch aborted');
-            } else {
-                console.error('Error:', error);
-                resetUI();
-                alert("Произошла ошибка при отправке запроса.");
+
+            var safeText = document.createElement('div');
+            safeText.innerText = displayMsg;
+            displayMsg = safeText.innerHTML.replace(/\n/g, '<br>');
+
+            var userRow = document.createElement('div');
+            userRow.className = 'message-row msg-user-container';
+            userRow.innerHTML = '<div class="message-bubble msg-user">' + (displayMsg ? '<div>' + displayMsg + '</div>' : '') + fileHtml + '</div>';
+            chatHistory.insertBefore(userRow, aiLoader);
+
+            aiLoader.style.display = 'flex';
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            messageInput.readOnly = true;
+            if (sendButton) sendButton.style.display = 'none';
+            if (stopButton) stopButton.style.display = 'flex';
+            messageInput.placeholder = "Nexus генерирует ответ...";
+            if (thinkingText) {
+                thinkingText.innerText = "Nexus думает";
+            }
+
+            var formData = new FormData(chatForm);
+            chatForm.reset();
+            fileNameDisplay.textContent = '';
+            messageInput.style.height = 'auto';
+
+            currentAbortController = new AbortController();
+
+            fetch(window.location.pathname, {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: formData,
+                signal: currentAbortController.signal
+            })
+            .then(response => response.json())
+            .then(data => {
+                currentAbortController = null;
+                aiLoader.style.display = 'none';
+
+                if (data.error) {
+                    resetUI();
+                    alert("Ошибка: " + data.error);
+                    return;
+                }
+
+                if (data.message !== undefined) {
+                    var aiRow = document.createElement('div');
+                    aiRow.className = 'message-row msg-assistant-container';
+
+                    var reasoningHtml = '';
+                    if (data.reasoning) {
+                        var reasoningClean = data.reasoning.replace(/\n/g, ' ');
+                        var snippet = reasoningClean.length > 60 ? reasoningClean.substring(0, 60) + '...' : reasoningClean;
+                        reasoningHtml = '<div class="markdown-body"><details><summary>Мысли Nexus: <span style="opacity: 0.7; font-size: 0.9em; font-weight: normal;">' + snippet + '</span></summary>\n\n' + marked.parse(data.reasoning) + '\n</details></div>\n\n';
+                    }
+
+                    if (data.chat_title_updated && data.new_title) {
+                        var activeItem = document.querySelector('.chat-history-item.active .chat-title-text');
+                        if (activeItem) {
+                            activeItem.textContent = data.new_title;
+                        }
+                    }
+
+                    aiRow.innerHTML = `                    <div class="assistant-avatar">
+                            <span class="nexus-star">✦</span>
+                        </div>
+                        <div class="message-bubble msg-assistant assistant-content">
+                            ${reasoningHtml}
+                            <div class="markdown-body"></div>
+                        </div>
+                    `;
+                    chatHistory.insertBefore(aiRow, aiLoader);
+
+                    var markdownBodies = aiRow.querySelectorAll('.markdown-body');
+                    currentContentDiv = markdownBodies[markdownBodies.length - 1];
+                    var fullText = data.message;
+                    var currentIndex = 0;
+
+                    function typeWriter() {
+                        if (currentIndex < fullText.length) {
+                            currentIndex += Math.floor(Math.random() * 4) + 2;
+                            if (currentIndex > fullText.length) currentIndex = fullText.length;
+
+                            currentContentDiv.innerHTML = marked.parse(fullText.substring(0, currentIndex));
+                            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+                            currentTypingAnimation = requestAnimationFrame(typeWriter);
+                        } else {
+                            currentTypingAnimation = null;
+                            if (window.MathJax) {
+                                window.MathJax.typesetPromise([currentContentDiv]).catch((err) => console.log('MathJax error:', err));
+                            }
+                            resetUI();
+                            chatHistory.scrollTop = chatHistory.scrollHeight;
+                        }
+                    }
+
+                    typeWriter();
+                } else {
+                    resetUI();
+                }
+            })
+            .catch(error => {
+                if (error.name === 'AbortError') {
+                    console.log('Fetch aborted');
+                } else {
+                    console.error('Error:', error);
+                    resetUI();
+                    alert("Произошла ошибка при отправке запроса.");
+                }
+            });
+        });
+
+        messageInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if (messageInput.value.trim() !== '' || fileUpload.files.length > 0) {
+                    if (messageInput.readOnly) return;
+                    if (sendButton) sendButton.click();
+                }
             }
         });
-    });
-
-    messageInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            if (messageInput.value.trim() !== '' || fileUpload.files.length > 0) {
-                if (messageInput.readOnly) return;
-                if (sendButton) sendButton.click();
-            }
-        }
-    });
-</script>
+    </script>
 </body>
 </html>

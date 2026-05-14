@@ -69,32 +69,65 @@
         a:hover {
             text-decoration: underline;
         }
+        .form-control::placeholder {
+            color: #ffffff;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
-    <div class="container d-flex justify-content-center">
-        <div class="nexus-panel">
-            <h2 class="mb-4 text-center fw-semibold"><span class="nexus-gradient-text">Регистрация</span></h2>
-            {% with messages = get_flashed_messages(with_categories=true) %}
-              {% if messages %}
-                {% for category, message in messages %}
-                  <div class="alert alert-{{ category }} text-white rounded-3 mb-3 p-2 text-center" style="background-color: #b3261e !important; border: none;">{{ message }}</div>
-                {% endfor %}
-              {% endif %}
-            {% endwith %}
-            <form method="POST">
-                <div class="mb-3">
-                    <input type="text" name="username" class="form-control" placeholder="Имя пользователя" required>
-                </div>
-                <div class="mb-4">
-                    <input type="password" name="password" class="form-control" placeholder="Пароль" required>
-                </div>
-                <button type="submit" class="btn-nexus">Создать аккаунт</button>
-                <div class="mt-4 text-center">
-                    <span class="text-secondary">Уже есть аккаунт?</span> <a href="{{ url_for('login') }}">Войти</a>
-                </div>
-            </form>
+<div class="container d-flex justify-content-center">
+    <div class="nexus-panel">
+        <h2 class="mb-4 text-center fw-semibold"><span class="nexus-gradient-text">Регистрация</span></h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} text-white rounded-3 mb-3 p-2 text-center"
+             style="background-color: #b3261e !important; border: none;">{{ message }}
         </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form method="POST">
+            <div class="mb-3">
+                <input type="text" name="username" class="form-control" placeholder="Имя пользователя" required>
+            </div>
+            <div class="mb-5">
+                <input type="password" name="password" class="form-control" placeholder="Пароль" required>
+            </div>
+            <button type="submit" class="btn-nexus">Создать аккаунт</button>
+            <div class="mt-4 text-center">
+                <span class="text-secondary">Уже есть аккаунт?</span> <a href="{{ url_for('login') }}"
+                                                                         style="color: #ffffff;">Войти</a>
+            </div>
+        </form>
     </div>
+</div>
 </body>
+<div style="position: absolute; top: 24px; left: 24px;">
+    <a href="{{ url_for('index') }}"
+       style="
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #ffffff;
+            text-decoration: none;
+
+            font-size: 0.95rem;
+            font-weight: 500;
+       ">
+
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24"
+             width="20"
+             height="20"
+             fill="currentColor">
+
+            <path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2z"/>
+        </svg>
+
+        Назад
+    </a>
+</div>
 </html>

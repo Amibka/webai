@@ -347,27 +347,6 @@
             height: 20px;
             fill: currentColor;
         }
-        .btn-stop {
-            background: transparent;
-            border: none;
-            color: #d96570;
-            padding: 10px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s;
-            margin-bottom: 4px;
-            margin-left: 8px;
-        }
-        .btn-stop:hover {
-            background-color: rgba(217, 101, 112, 0.08);
-        }
-        .btn-stop svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
         body.theme-light .btn-secondary {
             color: #212529 !important;
             border-color: #ced4da !important;
@@ -973,8 +952,7 @@
                     </div>
                     <div class="message-actions">
                         <button class="action-btn" title="Редактировать"
-                                onclick="editMessage({{ msg.id }}, '{{ msg.content | replace('\n', '\\n') | replace('\'', '\\\'') | replace('\"
-                        ', '&quot;') }}')">
+                                data-msg-id="{{ msg.id }}" data-content="{{ msg.content | e }}" onclick="editMessage(this)">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
                         </svg>
@@ -1046,11 +1024,6 @@
                 <button type="submit" class="btn-send" title="Отправить" id="sendButton">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                    </svg>
-                </button>
-                <button type="button" class="btn-stop" title="Остановить генерацию" id="stopButton">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M6 6h12v12H6z"/>
                     </svg>
                 </button>
             </form>
@@ -1247,14 +1220,41 @@
         }
 
         function copyMessage(btn) {
-            var contentDiv = btn.closest('.assistant-content').querySelector('.parsed-markdown');
-            if (!contentDiv) contentDiv = btn.closest('.assistant-content').querySelector('.markdown-body');
-            var text = contentDiv.innerText;
-            navigator.clipboard.writeText(text).then(() => {
+            var rawDiv = btn.closest('.assistant-content').querySelector('.raw-markdown');
+            var textToCopy = "";
+            if (rawDiv) {
+                textToCopy = rawDiv.textContent;
+                textToCopy = textToCopy.replace(/<details>[\s\S]*?<\/details>\s*/gi, '').trim();
+            } else {
+                var contentDiv = btn.closest('.assistant-content').querySelector('.markdown-body');
+                if (contentDiv) textToCopy = contentDiv.innerText;
+            }
+
+            function showSuccess() {
                 var originalHtml = btn.innerHTML;
-                btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
+                btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
                 setTimeout(() => { btn.innerHTML = originalHtml; }, 2000);
-            });
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy).then(showSuccess).catch(err => console.error('Clipboard error:', err));
+            } else {
+                var textArea = document.createElement("textarea");
+                textArea.value = textToCopy;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                textArea.style.top = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showSuccess();
+                } catch (err) {
+                    console.error('Fallback copy error:', err);
+                }
+                document.body.removeChild(textArea);
+            }
         }
 
         function regenerateResponse() {
@@ -1265,7 +1265,9 @@
             }
         }
 
-        function editMessage(msgId, currentText) {
+        function editMessage(btn) {
+            var msgId = btn.dataset.msgId;
+            var currentText = btn.dataset.content;
             var input = document.getElementById('messageInput');
             input.value = currentText;
             input.focus();
@@ -1281,7 +1283,6 @@
 
             messageInput.readOnly = true;
             if (sendButton) sendButton.style.display = 'none';
-            if (stopButton) stopButton.style.display = 'flex';
             messageInput.placeholder = "Nexus генерирует ответ...";
 
             currentAbortController = new AbortController();
@@ -1367,7 +1368,6 @@
         var chatForm = document.getElementById('chatForm');
         var aiLoader = document.getElementById('aiLoader');
         var sendButton = document.getElementById('sendButton');
-        var stopButton = document.getElementById('stopButton');
         var thinkingText = document.getElementById('thinkingText');
 
         var currentAbortController = null;
@@ -1379,40 +1379,7 @@
             messageInput.readOnly = false;
             messageInput.placeholder = "Введите запрос к Nexus...";
             if (sendButton) sendButton.style.display = 'flex';
-            if (stopButton) stopButton.style.display = 'none';
             messageInput.focus();
-        }
-
-        if (stopButton) {
-            stopButton.addEventListener('click', function() {
-                if (currentAbortController) {
-                    currentAbortController.abort();
-                    currentAbortController = null;
-                    resetUI();
-
-                    var cancelRow = document.createElement('div');
-                    cancelRow.className = 'message-row msg-assistant-container';
-                    cancelRow.innerHTML = `
-                        <div class="assistant-avatar">
-                            <span class="nexus-star">✦</span>
-                        </div>
-                        <div class="message-bubble msg-assistant assistant-content">
-                            <em style="color: #8e918f;">[Запрос отменен пользователем]</em>
-                        </div>
-                    `;
-                    chatHistory.insertBefore(cancelRow, aiLoader);
-                    chatHistory.scrollTop = chatHistory.scrollHeight;
-                }
-                else if (currentTypingAnimation) {
-                    cancelAnimationFrame(currentTypingAnimation);
-                    currentTypingAnimation = null;
-                    resetUI();
-
-                    if (currentContentDiv) {
-                        currentContentDiv.innerHTML += '<br><br><em style="color: #8e918f;">[Генерация остановлена]</em>';
-                    }
-                }
-            });
         }
 
         messageInput.addEventListener('input', function() {
@@ -1463,7 +1430,6 @@
 
             messageInput.readOnly = true;
             if (sendButton) sendButton.style.display = 'none';
-            if (stopButton) stopButton.style.display = 'flex';
             messageInput.placeholder = "Nexus генерирует ответ...";
             if (thinkingText) {
                 thinkingText.innerText = "Nexus думает";

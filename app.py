@@ -5,13 +5,21 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, User, Chat, Message, UserSettings
 from dotenv import load_dotenv
 import os
-from waitress import serve
+import logging
 
 load_dotenv()
 
+# Определение базового каталога относительно текущего файла
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+INSTANCE_DIR = os.path.join(BASE_DIR, 'instance')
+os.makedirs(INSTANCE_DIR, exist_ok=True)
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")  # Замените в продакшене
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "fallback_secret_key")
+
+# Кроссплатформенный абсолютный путь для базы данных SQLite
+db_file = os.path.join(INSTANCE_DIR, 'app.db').replace('\\', '/')
+app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{db_file}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -20,8 +28,8 @@ login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 
-LM_STUDIO_IP = os.getenv("LM_STUDIO_IP")
-LM_STUDIO_PORT = os.getenv("LM_STUDIO_PORT")
+LM_STUDIO_IP = os.getenv("LM_STUDIO_IP", "127.0.0.1")
+LM_STUDIO_PORT = os.getenv("LM_STUDIO_PORT", "1234")
 
 LM_STUDIO_URL = (
     f"http://{LM_STUDIO_IP}:{LM_STUDIO_PORT}/v1/chat/completions"
@@ -278,4 +286,18 @@ def chat_view(chat_id):
 
 
 if __name__ == '__main__':
-    serve(app, host='0.0.0.0', port=5000)
+    # Если переменная среды FLASK_ENV установлена в development, используем стандартный сервер (удобно для отладки)
+    if os.getenv("FLASK_ENV") == "development":
+        print("\n🚀 Запуск встроенного сервера Flask (РАЗРАБОТКА) на http://0.0.0.0:5000...")
+        app.run(host='0.0.0.0', port=5000, debug=True)
+    else:
+        # Иначе используем waitress (ПРОДАКШЕН)
+        from waitress import serve
+        logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
+        logger = logging.getLogger('waitress')
+        logger.setLevel(logging.INFO)
+
+        print("\n" + "="*50)
+        print("🚀 Запуск сервера Waitress (ПРОДАКШЕН) на http://0.0.0.0:5000...")
+        print("="*50 + "\n")
+        serve(app, host='0.0.0.0', port=5000)

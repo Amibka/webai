@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from datetime import datetime
+from config import Config
 
 db = SQLAlchemy()
 
@@ -16,7 +17,7 @@ class User(UserMixin, db.Model):
 class Chat(db.Model):
     __tablename__ = 'chats'
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150), default="Новый чат")
+    title = db.Column(db.String(150), default=Config.DEFAULT_CHAT_TITLE)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     messages = db.relationship('Message', backref='chat', lazy=True, cascade="all, delete-orphan")

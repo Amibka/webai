@@ -6,6 +6,7 @@ from models import db, User, Chat, Message, UserSettings
 from dotenv import load_dotenv
 import os
 import logging
+from waitress import serve
 
 load_dotenv()
 
@@ -288,16 +289,10 @@ def chat_view(chat_id):
 if __name__ == '__main__':
     # Если переменная среды FLASK_ENV установлена в development, используем стандартный сервер (удобно для отладки)
     if os.getenv("FLASK_ENV") == "development":
-        print("\n🚀 Запуск встроенного сервера Flask (РАЗРАБОТКА) на http://0.0.0.0:5000...")
         app.run(host='0.0.0.0', port=5000, debug=True)
     else:
-        # Иначе используем waitress (ПРОДАКШЕН)
-        from waitress import serve
+
         logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
         logger = logging.getLogger('waitress')
         logger.setLevel(logging.INFO)
-
-        print("\n" + "="*50)
-        print("🚀 Запуск сервера Waitress (ПРОДАКШЕН) на http://0.0.0.0:5000...")
-        print("="*50 + "\n")
         serve(app, host='0.0.0.0', port=5000)
